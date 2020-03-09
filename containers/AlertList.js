@@ -63,7 +63,7 @@ export default class AlertList extends React.Component {
     return (
       <View>
         <Modal
-          animationType='fade'
+          animationType='slide'
           transparent={false}
           visible={this.state.modalVisible}
           hardwareAccelerated={true}
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   Alert: {
     paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingHorizontal: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#d8d8d8',
     borderRadius: 20,

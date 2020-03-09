@@ -19,14 +19,14 @@ export default class CurrMap extends React.Component {
     const { lat, lng } = this.state;
     const { currCity, currLat, currLng } =  this.props;
     return (
-      <View style={{flex: 1}} >
+      <View style={{flex: 0.5}} pointerEvents='none' >
         <MapView
           style={{flex: 1}} 
           region={{
             latitude: lat,
             longitude: lng,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
           }}
         >
           <Marker

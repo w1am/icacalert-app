@@ -47,7 +47,7 @@ export default class Status extends React.Component {
 
 const styles = StyleSheet.create({
   Layout: {
-    backgroundColor: '#003087',
+    backgroundColor: '#4849A1',
     paddingVertical: 30,
     paddingHorizontal: 20,
     flexDirection: 'row',

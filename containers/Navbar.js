@@ -16,15 +16,6 @@ export default class Navbar extends React.Component {
             color="#2A4F98"
           />
         </Link>
-
-        <Link component={TouchableOpacity} to='/map'>
-          <Icon
-            style={styles.NavigatorIcon}
-            name="map-marker"
-            size={20}
-            color="#2A4F98"
-          />
-        </Link>
       </View>
     )
   }
