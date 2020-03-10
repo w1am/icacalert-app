@@ -8,14 +8,16 @@ export default class Navbar extends React.Component {
   render() {
     return (
       <View style={styles.Layout}>
-        <Link component={TouchableOpacity} to='/' >
-          <Icon
-            style={styles.NavigatorIcon}
-            name="arrow-left"
-            size={20}
-            color="#2A4F98"
-          />
-        </Link>
+        <View style={styles.BackHandler}>
+          <Link style={styles.BackBtn} to='/' component={TouchableOpacity}>
+            <Icon
+              name="chevron-left"
+              size={20}
+              color="#232323"
+            />
+            <Text style={styles.BackText}>Home</Text>
+          </Link>
+        </View>
       </View>
     )
   }
@@ -23,9 +25,9 @@ export default class Navbar extends React.Component {
 
 const styles = StyleSheet.create({
   Layout: {
-    backgroundColor: 'white',
-    paddingVertical: 15,
-    paddingHorizontal: 22,
+    backgroundColor: '#EFF1F4',
+    paddingHorizontal: 25,
+    paddingTop: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#dbdbdb',
     flexDirection: 'row',
@@ -34,5 +36,17 @@ const styles = StyleSheet.create({
   NavigatorIcon: {
     paddingVertical: 10,
     paddingHorizontal: 20
+  },
+  BackHandler: {
+    paddingVertical: 20,
+    width: 90,
+  },
+  BackBtn: {
+    flexDirection: 'row'
+  },
+  BackText: {
+    fontSize: 19,
+    paddingLeft: 15,
+    top: -4
   }
 })

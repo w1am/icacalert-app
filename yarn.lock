@@ -4939,6 +4939,11 @@ react-refresh@^0.4.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.4.2.tgz#54a277a6caaac2803d88f1d6f13c1dcfbd81e334"
   integrity sha512-kv5QlFFSZWo7OlJFNYbxRtY66JImuP2LcrFgyJfQaf85gSP+byzG21UbDQEYjU7f//ny8rwiEkO6py2Y+fEgAQ==
 
+react-router-native-stack@^0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/react-router-native-stack/-/react-router-native-stack-0.0.16.tgz#c9b392a73f08c57772c49cac7fa08d44f3990259"
+  integrity sha512-23i/mr0UlS8Lrm+uZOYp9I7+QvF5tO2q+KV7cdtJDQkwypEiVKk4Tl/ePu9kA8tOVbpt5AxBdcBfTgKheMzdGw==
+
 react-router-native@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/react-router-native/-/react-router-native-5.1.2.tgz#1ef02785cb396f2b4234b85ab32e551c191ff41b"

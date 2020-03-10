@@ -21,7 +21,9 @@ export default class CurrMap extends React.Component {
     return (
       <View style={{flex: 0.5}} pointerEvents='none' >
         <MapView
-          style={{flex: 1}} 
+          style={{
+            flex: 1,
+          }} 
           region={{
             latitude: lat,
             longitude: lng,

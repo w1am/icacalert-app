@@ -14,6 +14,22 @@ export const DISTRICT_ALERTS_QUERY = gql`
   }
 `
 
+export const INDEX_ALERT_QUERY = gql`
+  query($dname: String, $start: Int, $count: Int) {
+    indexAlerts(dname: $dname, start: $start, count: $count) {
+      len
+      slicedAlerts {
+        desc
+        latitude
+        longitude
+        mdhm
+        city
+        district
+      }
+    }
+  }
+`
+
 export const ALERTS_QUERY = gql`
   query {
     alerts {

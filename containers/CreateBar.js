@@ -6,18 +6,16 @@ export default class CreateBar extends React.Component {
   render() {
     const { onPress } = this.props;
     return (
-      <View style={styles.Layout}>
-        <Link to='/alert' component={TouchableOpacity}>
-          <Text style={styles.BeforePress}>Send Alert</Text>
-        </Link>
-      </View>
+      <Link style={styles.Layout} to='/alert' component={TouchableOpacity}>
+        <Text style={styles.BeforePress}>Send Alert</Text>
+      </Link>
     )
   }
 }
 
 const styles = StyleSheet.create({
   Layout: {
-    backgroundColor: 'white',
+    backgroundColor: '#9F6AFE',
     borderTopWidth: 1,
     borderTopColor: '#dbdbdb'
   },
@@ -26,7 +24,7 @@ const styles = StyleSheet.create({
   },
   BeforePress: {
     textAlign: 'center',
-    color: '#2A4F98',
+    color: 'white',
     fontWeight: 'bold',
     paddingVertical: 22
   }

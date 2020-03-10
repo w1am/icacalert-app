@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text,TouchableOpacity, ActivityIndicator, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, Text,TouchableOpacity, ActivityIndicator, BackHandler, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { TextInput } from 'react-native-paper';
+import { Link, Redirect } from 'react-router-native';
 
 import { checkEmail, checkPhone } from '../utils/formChecker';
 
@@ -30,14 +31,23 @@ class Alert extends React.Component {
       loading: false
     }
     this.onButtonPress = this.onButtonPress.bind(this)
+    this.handleBackPress = this.handleBackPress.bind(this)
   }
   componentDidMount() {
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     navigator.geolocation.getCurrentPosition(p => {
       this.setState({
         lat: p.coords.latitude,
         lng: p.coords.longitude
       })
     })
+  }
+  componentWillUnmount() {
+    this.backHandler.remove()
+  }
+  handleBackPress() {
+    this.props.history.goBack()
+    return true
   }
   onContentSizeChange = (contentWidth, contentHeight) => {
     this.setState({ screenHeight: contentHeight })
@@ -84,6 +94,16 @@ class Alert extends React.Component {
           scrollEnabled={true}
           onContentSizeChange={this.onContentSizeChange}
         >
+          <View style={styles.BackHandler}>
+            <Link style={styles.BackBtn} to='/' component={TouchableOpacity}>
+              <Icon
+                name="chevron-left"
+                size={20}
+                color="#232323"
+              />
+              <Text style={styles.BackText}>Home</Text>
+            </Link>
+          </View>
           <Text style={styles.Header}>Alert Us</Text>
           <Text style={styles.Notice}>1) Your alerts are anonymous</Text>
           <Text style={styles.Notice}>2) Fake entries & spamming may be liable to legal procedures</Text>
@@ -177,17 +197,19 @@ const styles = StyleSheet.create({
     borderTopColor: '#dbdbdb'
   },
   Header: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     paddingLeft: 20,
-    marginBottom: 10
+    marginVertical: 10,
+    color: '#383838'
   },
   Description: {
     marginTop: 20
   },
   Notice: {
     color: '#919191',
-    paddingLeft: 10
+    paddingLeft: 10,
+    paddingVertical: 5
   },
   Note: {
     color: '#919191',
@@ -209,6 +231,18 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold'
   },
+  BackHandler: {
+    paddingVertical: 20,
+    width: 90,
+  },
+  BackBtn: {
+    flexDirection: 'row'
+  },
+  BackText: {
+    fontSize: 19,
+    paddingLeft: 15,
+    top: -4
+  }
 })
 
 export default graphql(CREATE_ALERT_MUTATION)(Alert);

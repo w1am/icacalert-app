@@ -9,8 +9,6 @@ import { client } from './apollo';
 import axios from 'axios';
 import { normalizeDistrictName } from './utils/districtNameFormatter';
 
-import Navbar from './containers/Navbar';
-
 export default class App extends React.Component {
   state = {
     district:''
@@ -30,7 +28,6 @@ export default class App extends React.Component {
     return (
       <ApolloProvider client={client}>
         <NativeRouter>
-          <Navbar />
           <Routes />
         </NativeRouter>
       </ApolloProvider>

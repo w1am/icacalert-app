@@ -1,18 +1,24 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, BackHandler } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 import CreateBar from '../containers/CreateBar';
+import Navbar from '../containers/Navbar';
 
 import { graphql } from 'react-apollo';
 import { ALERTS_QUERY } from '../graphql'
 
 class MapPage extends React.Component {
-  state = {
-    lat: 0,
-    lng: 0
+  constructor(props) {
+    super(props);
+    this.state = {
+      lat: -20.117843,
+      lng: 57.507746
+    }
+    this.handleBackPress = this.handleBackPress.bind(this)
   }
   componentDidMount() {
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     navigator.geolocation.getCurrentPosition(p => {
       this.setState({
         lat: p.coords.latitude,
@@ -20,11 +26,19 @@ class MapPage extends React.Component {
       })
     })
   }
+  componentWillUnmount() {
+    this.backHandler.remove()
+  }
+  handleBackPress() {
+    this.props.history.goBack()
+    return true
+  }
   render() {
     const { alerts, loading } = this.props.data;
     const { lat, lng } = this.state;
     return (
       <View style={{flex: 1}} >
+        <Navbar />
         <MapView
           style={{flex: 1}} 
           region={{

@@ -28,14 +28,23 @@ export default class Status extends React.Component {
           ({loading, data}) => {
             if (loading) return (
               <View style={styles.Layout}>
-                  <ActivityIndicator size="small" color="white"></ActivityIndicator>
+                <View style={styles.TendencyCard}>
+                  <Text style={styles.Tendency}>LOW</Text>
+                  <Text style={styles.MiniText}>Tendency</Text>
+                </View>
               </View>
             );
             const { getAlerts } = data;
             return (
               <View style={styles.Layout}>
-                <Text style={styles.Tendency}>{getAlerts.tendency.toUpperCase()}</Text>
-                <Text style={styles.Count}>{getAlerts.alerts ? getAlerts.alerts.length : 0}</Text>
+                <View style={styles.Card}>
+                  <Text style={styles.Label}>Tendency</Text>
+                  <Text style={styles.Tendency}>{getAlerts.tendency.toUpperCase()}</Text>
+                </View>
+                <View style={styles.Card}>
+                  <Text style={styles.Label}>Count</Text>
+                  <Text style={styles.Count}>{getAlerts.alerts ? getAlerts.alerts.length : 0}</Text>
+                </View>
               </View>
             )
           }
@@ -47,23 +56,31 @@ export default class Status extends React.Component {
 
 const styles = StyleSheet.create({
   Layout: {
-    backgroundColor: '#4849A1',
-    paddingVertical: 30,
-    paddingHorizontal: 20,
     flexDirection: 'row',
-    alignContent: 'space-around',
-    justifyContent: 'center',
-    borderRadius: 20,
     marginVertical: 25,
+    backgroundColor: '#3694B4',
+    paddingVertical: 20,
+    borderRadius: 10
+  },
+  MiniText: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: 'white',
+    paddingTop: 10
+  },
+  Card: {
+    paddingHorizontal: 50,
+    paddingBottom: 10,
+  },
+  Label: {
+    color: 'white'
   },
   Tendency: {
     fontSize: 30,
     color: 'white',
-    paddingHorizontal: 50,
   },
   Count: {
     fontSize: 30,
     color: 'white',
-    paddingHorizontal: 50
   }
 })
