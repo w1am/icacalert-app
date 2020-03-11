@@ -1,8 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Link, Redirect } from 'react-router-native';
+import { Link } from 'react-router-native';
 
 export default class Navbar extends React.Component {
   render() {

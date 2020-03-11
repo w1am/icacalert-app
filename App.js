@@ -1,7 +1,7 @@
 import React from 'react';
 import Routes from './routes';
-import { StatusBar, View, AsyncStorage } from 'react-native';
-import { NativeRouter, Route } from 'react-router-native';
+import { StatusBar, AsyncStorage } from 'react-native';
+import { NativeRouter } from 'react-router-native';
 
 import { ApolloProvider } from 'react-apollo';
 import { client } from './apollo';

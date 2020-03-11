@@ -1,23 +1,17 @@
 import React from 'react';
-import { View, Text, BackHandler } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 import CreateBar from '../containers/CreateBar';
 import Navbar from '../containers/Navbar';
 
-import { graphql } from 'react-apollo';
+import { graphql, Query } from 'react-apollo';
 import { ALERTS_QUERY } from '../graphql'
 
-class MapPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lat: -20.117843,
-      lng: 57.507746
-    }
-    this.handleBackPress = this.handleBackPress.bind(this)
-  }
+export default class MapPage extends React.Component {
+  _isMounted = false;
   componentDidMount() {
+    this._isMounted = true;
     this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     navigator.geolocation.getCurrentPosition(p => {
       this.setState({
@@ -27,15 +21,17 @@ class MapPage extends React.Component {
     })
   }
   componentWillUnmount() {
+    this._isMounted = false;
     this.backHandler.remove()
   }
-  handleBackPress() {
-    this.props.history.goBack()
+  handleBackPress = () => {
+    this.props.history.push('/')
+    // this.props.history.goBack()
     return true
   }
   render() {
-    const { alerts, loading } = this.props.data;
-    const { lat, lng } = this.state;
+    const lat = -20.117843
+    const lng = 57.507746
     return (
       <View style={{flex: 1}} >
         <Navbar />
@@ -56,25 +52,29 @@ class MapPage extends React.Component {
             image={require('../assets/pin.png')}
             title='You'
           />
-          {
-            loading ? null : alerts.map(a => (
-              <Marker
-                key={a.id}
-                coordinate={{
-                  latitude: parseFloat(a.latitude),
-                  longitude: parseFloat(a.longitude)
-                }}
-                image={require('../assets/pinactive.png')}
-                title={a.city}
-              />
-            ))
-          }
+          <Query pollingInterval={500} query={ALERTS_QUERY}>
+            {
+              ({ loading, data, startPolling, stopPolling }) => {
+                if (loading) return null;
+                console.log(data);
+                const { alerts } = data;
+                return alerts.map(a => (
+                  <Marker
+                    key={a.id}
+                    coordinate={{
+                      latitude: parseFloat(a.latitude),
+                      longitude: parseFloat(a.longitude)
+                    }}
+                    image={require('../assets/pinactive.png')}
+                    title={a.city}
+                  />
+                ))
+              }
+            }
+          </Query>
         </MapView>
         <CreateBar />
       </View>
     )
   }
 }
-
-export default graphql(ALERTS_QUERY)(MapPage);
-

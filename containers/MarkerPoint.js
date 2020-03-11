@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import { Marker } from 'react-native-maps';
 
 export default class MarkerPoint extends React.Component {
   render() {

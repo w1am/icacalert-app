@@ -20,6 +20,7 @@ export const INDEX_ALERT_QUERY = gql`
       len
       slicedAlerts {
         desc
+        id
         latitude
         longitude
         mdhm

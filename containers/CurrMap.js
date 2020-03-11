@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 export default class CurrMap extends React.Component {
@@ -17,7 +17,7 @@ export default class CurrMap extends React.Component {
   }
   render() {
     const { lat, lng } = this.state;
-    const { currCity, currLat, currLng } =  this.props;
+    const { currLat, currLng } =  this.props;
     return (
       <View style={{flex: 0.5}} pointerEvents='none' >
         <MapView

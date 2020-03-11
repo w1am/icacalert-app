@@ -1,9 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, AsyncStorage, ActivityIndicator } from 'react-native';
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import axios from 'axios';
-import { normalizeDistrictName } from '../utils/districtNameFormatter';
+import {View, Text, StyleSheet, AsyncStorage } from 'react-native';
 
 import { graphql, Query } from 'react-apollo';
 import { DISTRICT_ALERTS_QUERY } from '../graphql'
@@ -23,14 +19,18 @@ export default class Status extends React.Component {
   render() {
     const { dname } = this.state;
     return (
-      <Query query={DISTRICT_ALERTS_QUERY} variables={{ dname }}>
+      <Query pollInterval={500} query={DISTRICT_ALERTS_QUERY} variables={{ dname }}>
         {
-          ({loading, data}) => {
+          ({loading, data, startPolling, stopPolling}) => {
             if (loading) return (
               <View style={styles.Layout}>
-                <View style={styles.TendencyCard}>
+                <View style={styles.Card}>
+                  <Text style={styles.Label}>Tendency</Text>
                   <Text style={styles.Tendency}>LOW</Text>
-                  <Text style={styles.MiniText}>Tendency</Text>
+                </View>
+                <View style={styles.Card}>
+                  <Text style={styles.Label}>Count</Text>
+                  <Text style={styles.Count}>0</Text>
                 </View>
               </View>
             );
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   Layout: {
     flexDirection: 'row',
     marginVertical: 25,
-    backgroundColor: '#3694B4',
+    backgroundColor: '#1871BB',
     paddingVertical: 20,
     borderRadius: 10
   },

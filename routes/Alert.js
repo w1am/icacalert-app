@@ -46,8 +46,10 @@ class Alert extends React.Component {
     this.backHandler.remove()
   }
   handleBackPress() {
-    this.props.history.goBack()
+    this.props.history.push('/') 
     return true
+    // this.props.history.goBack()
+    // return true
   }
   onContentSizeChange = (contentWidth, contentHeight) => {
     this.setState({ screenHeight: contentHeight })
@@ -108,6 +110,8 @@ class Alert extends React.Component {
           <Text style={styles.Notice}>1) Your alerts are anonymous</Text>
           <Text style={styles.Notice}>2) Fake entries & spamming may be liable to legal procedures</Text>
           <TextInput
+            error={descErr}
+            theme={{ colors: { primary: '#3F99E0',underlineColor:'transparent',}}}
             value={desc}
             style={styles.Description}
             mode='outlined'
@@ -119,6 +123,8 @@ class Alert extends React.Component {
           ) : null }
           <Text style={styles.Note}>These fields below may be left blank if you wish.</Text>
           <TextInput
+            error={emailErr}
+            theme={{ colors: { primary: '#3F99E0',underlineColor:'transparent',}}}
             value={email}
             style={styles.Description}
             mode='outlined'
@@ -129,7 +135,9 @@ class Alert extends React.Component {
             <Text style={styles.Error}>{emailErr}</Text>
           ) : null }
           <TextInput
+            error={phoneErr}
             value={phone}
+            theme={{ colors: { primary: '#3F99E0', underlineColor:'transparent',}}}
             style={styles.Description}
             mode='outlined'
             label='Phone (optional)'
