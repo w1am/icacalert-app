@@ -22,7 +22,7 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       start: 0,
-      count: 5,
+      count: 10,
       screenHeight: 0,
       dname:'',
       dname: '',
@@ -70,7 +70,7 @@ export default class Home extends React.Component {
           <View style={styles.Alerts}>
             <Text style={styles.Header}> Alerts </Text>
             <TouchableOpacity onPress={() => this.props.history.push('/map')}>
-              <Text style={styles.See}> See all </Text>
+              <Text style={styles.See}>See all</Text>
             </TouchableOpacity>
           </View>
           <Query pollInterval={500} query={INDEX_ALERT_QUERY} variables={{ dname, start, count }}>
@@ -83,7 +83,7 @@ export default class Home extends React.Component {
                 return (
                   <View style={{ paddingBottom: 100 }}>
                     {
-                       slicedAlerts.map(alert => (
+                      slicedAlerts.map(alert => (
                         <View key={alert.id} style={styles.Alert}>
                           <View>
                             <Icon
@@ -95,13 +95,14 @@ export default class Home extends React.Component {
                           </View>
                           <View>
                             <TouchableOpacity onPress={() => {
-                                this.setState({
-                                  currLat: alert.latitude,
-                                  currLng: alert.longitude,
-                                  currCity: alert.city
-                                })
-                                this._panel.show()
-                              }}>
+                              this.setState({
+                                currLat: alert.latitude,
+                                currLng: alert.longitude,
+                                currCity: alert.city,
+                                currDate: alert.mdhm
+                              })
+                              this._panel.show()
+                            }}>
                               <Region>{alert.city}</Region>
                             </TouchableOpacity>
                             <Date>{alert.mdhm}</Date>
@@ -113,22 +114,22 @@ export default class Home extends React.Component {
                       (slicedAlerts.length == 0 || slicedAlerts.length >= len) ? (
                         <Text style={styles.Note}>that's all we have for this month 😊</Text>
                         ) : (
-                          <Text style={styles.ShowMore} onPress={() => {
-                            this.setState({ count: count + 5 })
-                            refetch()
-                          }}>Show more</Text>
+                          <TouchableOpacity onPress={() => {
+                              this.setState({ count: count + 10 })
+                              refetch()
+                            }}>
+                            <Text style={styles.ShowMore}>Show more</Text>
+                          </TouchableOpacity>
                         )
                     }
                   </View>
                 )
-                // return <AlertContent action={this.loadMap} slicedAlerts={slicedAlerts} len={len} dname={dname} />
               }
             }
           </Query>
         </ScrollView>
         <SlidingUpPanel
           friction={0.5}
-          draggableRange={{ top: 480, bottom: 0 }}
           backdropOpacity={0.2}
           ref={c => this._panel = c}>
           <View style={styles.container}>
@@ -231,7 +232,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingRight: 20,
     paddingTop: 3,
-    color: '#4849A1'
+    color: '#1871BB'
   },
   Alerts: {
     flex: 1,

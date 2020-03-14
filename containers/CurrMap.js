@@ -19,7 +19,7 @@ export default class CurrMap extends React.Component {
     const { lat, lng } = this.state;
     const { currLat, currLng } =  this.props;
     return (
-      <View style={{flex: 0.5}} pointerEvents='none' >
+      <View style={{flex: 1}} pointerEvents='none' >
         <MapView
           style={{
             flex: 1,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text,TouchableOpacity, ActivityIndicator, BackHandler, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, BackHandler, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { Link, Redirect } from 'react-router-native';
 
@@ -48,8 +48,6 @@ class Alert extends React.Component {
   handleBackPress() {
     this.props.history.push('/') 
     return true
-    // this.props.history.goBack()
-    // return true
   }
   onContentSizeChange = (contentWidth, contentHeight) => {
     this.setState({ screenHeight: contentHeight })
@@ -138,7 +136,7 @@ class Alert extends React.Component {
             error={phoneErr}
             value={phone}
             theme={{ colors: { primary: '#3F99E0', underlineColor:'transparent',}}}
-            style={styles.Description}
+            style={styles.Phone}
             mode='outlined'
             label='Phone (optional)'
             onChangeText={phone => this.setState({ phone, error: false, phoneErr: '' })}
@@ -212,7 +210,11 @@ const styles = StyleSheet.create({
     color: '#383838'
   },
   Description: {
-    marginTop: 20
+    marginTop: 20,
+  },
+  Phone: {
+    marginTop: 20,
+    paddingBottom: 100
   },
   Notice: {
     color: '#919191',
@@ -237,7 +239,7 @@ const styles = StyleSheet.create({
   BeforePress: {
     textAlign: 'center',
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   BackHandler: {
     paddingVertical: 20,
